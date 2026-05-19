@@ -59,7 +59,7 @@ Contact: support@gameuxsummit26.com
 - No markdown headers, no em dashes, no walls of text
 - Never make up anything not listed above`
 
-export async function askClaude(jid: string, userMessage: string): Promise<string> {
+export async function askGroq(jid: string, userMessage: string): Promise<string> {
   const history = await getHistory(jid)
 
   const response = await getClient().chat.completions.create({
