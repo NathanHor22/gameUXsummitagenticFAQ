@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.gameuxsummit26.com)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\damna\\\\Documents\\\\GitHub\\\\gameUXsummitagenticFAQ\\\\data\")",
+      "PowerShell(New-Item -ItemType File -Force \"c:\\\\Users\\\\damna\\\\Documents\\\\GitHub\\\\gameUXsummitagenticFAQ\\\\data\\\\.gitkeep\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\damna\\.claude\\projects\\c--Users-damna-Documents-GitHub-gameUXsummitagenticFAQ\\memory"
+    ]
+  }
+}
