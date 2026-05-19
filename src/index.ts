@@ -4,35 +4,59 @@ import makeWASocket, {
   useMultiFileAuthState,
 } from '@whiskeysockets/baileys'
 import { Boom } from '@hapi/boom'
+import qrcode from 'qrcode-terminal'
 import dotenv from 'dotenv'
 import { routeMessage } from './router'
 import { sendWithDelay } from './delay'
 
 dotenv.config()
 
-async function connectToWhatsApp() {
+let reconnectDelay = 3000
 
+async function connectToWhatsApp() {
   const { state, saveCreds } = await useMultiFileAuthState('./auth_info_baileys')
   const { version } = await fetchLatestBaileysVersion()
 
   const sock = makeWASocket({
     version,
     auth: state,
-    printQRInTerminal: true,
     browser: ['Game UX Summit Bot', 'Chrome', '1.0.0'],
     getMessage: async () => undefined,
+    connectTimeoutMs: 60000,
+    keepAliveIntervalMs: 25000,
+    retryRequestDelayMs: 2000,
   })
 
   sock.ev.on('creds.update', saveCreds)
 
-  sock.ev.on('connection.update', ({ connection, lastDisconnect }) => {
+  sock.ev.on('connection.update', ({ connection, lastDisconnect, qr }) => {
+    if (qr) {
+      console.log('\nScan this QR code with WhatsApp on your phone:\n')
+      qrcode.generate(qr, { small: true })
+    }
+
+    if (connection === 'open') {
+      reconnectDelay = 3000
+      console.log('✅ WhatsApp connected — Game UX Summit bot is live')
+    }
+
     if (connection === 'close') {
       const code = (lastDisconnect?.error as Boom)?.output?.statusCode
-      const shouldReconnect = code !== DisconnectReason.loggedOut
-      console.log(`Connection closed (code ${code}). Reconnecting: ${shouldReconnect}`)
-      if (shouldReconnect) connectToWhatsApp()
-    } else if (connection === 'open') {
-      console.log('✅ WhatsApp connected — Game UX Summit bot is live')
+
+      if (code === DisconnectReason.loggedOut) {
+        console.log('❌ Logged out — delete the auth_info_baileys folder and restart to re-link.')
+        process.exit(1)
+      }
+
+      // Code 440 = conflict/replaced — another session took over, wait longer before retrying
+      if (code === 440) {
+        reconnectDelay = Math.min(reconnectDelay * 2, 60000)
+        console.log(`⚠️  Session conflict detected. Retrying in ${reconnectDelay / 1000}s...`)
+      } else {
+        console.log(`Connection closed (code ${code}). Reconnecting in ${reconnectDelay / 1000}s...`)
+      }
+
+      setTimeout(connectToWhatsApp, reconnectDelay)
     }
   })
 
@@ -45,7 +69,6 @@ async function connectToWhatsApp() {
 
       const jid = msg.key.remoteJid!
 
-      // Only handle DMs, not group chats
       if (jid.endsWith('@g.us')) continue
 
       const text =

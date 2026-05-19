@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3'
 import path from 'path'
-import type Anthropic from '@anthropic-ai/sdk'
+
+type Message = { role: 'user' | 'assistant'; content: string }
 
 const DB_PATH = path.join(process.cwd(), 'data', 'conversations.db')
 const MAX_MESSAGES = 8
@@ -28,7 +29,7 @@ const insertMessage = db.prepare<[string, string, string]>(`
   INSERT INTO messages (jid, role, content) VALUES (?, ?, ?)
 `)
 
-export async function getHistory(jid: string): Promise<Anthropic.MessageParam[]> {
+export async function getHistory(jid: string): Promise<Message[]> {
   const rows = selectHistory.all(jid, MAX_MESSAGES) as { role: string; content: string }[]
   return rows.map(r => ({ role: r.role as 'user' | 'assistant', content: r.content }))
 }
