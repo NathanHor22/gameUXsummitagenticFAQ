@@ -6,27 +6,27 @@ const processing = new Set<string>()
 
 const OOH_FAQ = `Hey! Thanks for reaching out 😊 We're outside office hours right now but here's everything you probably need:
 
-*Game UX Summit 2026* — 25th anniversary!
-📅 *October 12–14, 2026*
-📍 *Connexion Conference & Event Centre (CCEC)*, Bangsar South, KL
+Game UX Summit 2026 — 25th anniversary!
+📅 October 12–14, 2026
+📍 Connexion Conference & Event Centre (CCEC), Bangsar South, KL
 
-*Tickets (on sale now)*
-• Early Bird — *$100* (ends May 22, 2026, grab it!)
-• Standard — *$150*
-• Student — *$50*
+Tickets (on sale now)
+• Early Bird — $100 (ends May 22, 2026, grab it!)
+• Standard — $150
+• Student — $50
 • Masterclass (Oct 14) — pricing coming soon, separate ticket
 
 All summit tickets include breakfast, lunch, talks and networking.
 👉 https://www.eventbrite.com/e/game-ux-summit-2026-tickets-1988970217462?aff=oddtdtcreator
 
-*Schedule*
+Schedule
 • Oct 12 — Talks 9am–5pm + evening networking mixer
 • Oct 13 — Talks 9am–5pm
 • Oct 14 — Masterclasses 9am–5pm (separate ticket)
 
-*Closest hotel:* VE Hotel and Residence (walking distance to CCEC)
+Closest hotel: VE Hotel and Residence (walking distance to CCEC)
 
-*Speakers:* Lineup not announced yet, watch the website for updates.
+Speakers: Lineup not announced yet, watch the website for updates.
 
 🌐 https://www.gameuxsummit26.com
 📧 support@gameuxsummit26.com

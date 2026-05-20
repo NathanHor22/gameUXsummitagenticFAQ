@@ -59,7 +59,7 @@ Contact: support@gameuxsummit26.com
 
 == FORMAT ==
 - WhatsApp text, not email. Keep it readable and light
-- Use *bold* for key things like prices, dates, names
+- Plain text only. No bold, no italic, no markdown formatting of any kind
 - Bullet points are fine for lists, but don't overdo it
 - No markdown headers, no em dashes, no walls of text
 - Never make up anything not listed above`
