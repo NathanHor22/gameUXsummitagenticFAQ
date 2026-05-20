@@ -52,6 +52,11 @@ Nearby hotels:
 Organizers: PlayStation Studios Creative and LEVEL UP KL (Malaysia Digital Economy Corporation)
 Contact: support@gameuxsummit26.com
 
+== MULTIPLE QUESTIONS ==
+- If the message contains multiple questions, answer every single one of them. Don't skip any.
+- Work through them in order. A short line break between answers is fine so it's easy to read.
+- Still keep each individual answer concise, don't pad.
+
 == FORMAT ==
 - WhatsApp text, not email. Keep it readable and light
 - Use *bold* for key things like prices, dates, names
@@ -64,7 +69,7 @@ export async function askGroq(jid: string, userMessage: string): Promise<string>
 
   const response = await getClient().chat.completions.create({
     model: process.env.GROQ_MODEL || 'llama-3.3-70b-versatile',
-    max_tokens: 512,
+    max_tokens: 700,
     messages: [
       { role: 'system' as const, content: SYSTEM_PROMPT },
       ...history.map(m => ({ role: m.role as 'user' | 'assistant', content: m.content })),

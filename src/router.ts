@@ -41,12 +41,11 @@ function isOfficeHours(): boolean {
   return klHour >= 9 && klHour < 18
 }
 
-// Route to Groq when the message clearly spans multiple topics.
+// Route to Groq when the message spans multiple topics.
 function isComplexMessage(text: string): boolean {
   const questionCount = (text.match(/\?/g) || []).length
-  if (questionCount >= 3) return true
-  if (text.length > 280) return true
-  if (/\b(and what|and when|and where|and how|and who|what about|besides)\b/i.test(text)) return true
+  if (questionCount >= 2) return true
+  if (/\b(and what|and when|and where|and how|and who|what about|besides|also|one more|another question)\b/i.test(text)) return true
   return false
 }
 
