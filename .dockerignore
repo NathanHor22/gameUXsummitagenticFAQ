@@ -1,0 +1,9 @@
+node_modules
+dist
+auth_info_baileys
+data
+.env
+.env.*
+*.log
+.git
+.gitignore

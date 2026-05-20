@@ -2,5 +2,5 @@ node_modules/
 dist/
 .env
 auth_info_baileys/
-data/conversations.db
+data/
 *.log

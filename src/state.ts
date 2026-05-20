@@ -1,11 +1,13 @@
 import Database from 'better-sqlite3'
 import path from 'path'
+import fs from 'fs'
 
 type Message = { role: 'user' | 'assistant'; content: string }
 
 const DB_PATH = path.join(process.cwd(), 'data', 'conversations.db')
 const MAX_MESSAGES = 8
 
+fs.mkdirSync(path.dirname(DB_PATH), { recursive: true })
 const db = new Database(DB_PATH)
 
 db.exec(`
